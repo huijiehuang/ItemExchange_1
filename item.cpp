@@ -1,3 +1,4 @@
+//Item类的函数
 #include "itemExchange.h"
 
 Item::Item(char *name0, char *owner0, char *address0, char *phoneNumber0)

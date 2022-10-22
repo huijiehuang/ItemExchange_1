@@ -1,3 +1,4 @@
+//实现系统功能的函数
 #include "itemExchange.h"
 
 void addItem()
@@ -6,19 +7,20 @@ void addItem()
    char owner0[9];
    char address0[40];
    char phoneNumber0[12];
-   cout << "请输入物品名:\n";
+   cout << "请输入物品名:"<<endl;
    cin >> name0;
-   cout << "请输入所有人:\n";
+   cout << "请输入所有人:"<<endl;
    cin >> owner0;
-   cout << "请输入地址（小区）:\n";
+   cout << "请输入地址（小区）:"<<endl;
    cin >> address0;
-   cout << "请输入手机号:\n";
+   cout << "请输入手机号:"<<endl;
    cin >> phoneNumber0;
    Item newItem(name0, owner0, address0, phoneNumber0);
 
    fstream iofile("itemFile.txt");
    Item currentItem;
 
+   //添加物品时，先复用被删除物品的空间，若无则添加在文件最后
    int pos = 0;
    iofile.seekg(0);
    iofile.read(reinterpret_cast<char *> (&currentItem), sizeof(Item));
@@ -56,6 +58,8 @@ void displayAll()
    infile.close();
 }
 
+//输入数据：模式
+//模式1为按物品名检索，模式2为按物品所在小区检索
 bool searchItem(int mode)
 {
    if (mode == 1)
@@ -115,15 +119,16 @@ bool delItem()
    char owner0[9];
    char address0[40];
    char phoneNumber0[12];
-   cout << "请输入物品名:\n";
+   cout << "请输入物品名:"<<endl;
    cin >> name0;
-   cout << "请输入所有人:\n";
+   cout << "请输入所有人:"<<endl;
    cin >> owner0;
 
    fstream iofile("itemFile.txt");
    Item currentItem;
    int  pos = 0;
 
+   //删除物品，但不改变其位置
    iofile.read(reinterpret_cast<char *> (&currentItem), sizeof(Item));
    while (!iofile.eof())
    {
